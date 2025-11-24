@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile
+from models.buildings import Base
 
 app = FastAPI()
 
@@ -11,4 +12,5 @@ async def root(file: UploadFile):
     for line in content:
         print("line:\n", line)
         data.append(line)
+    base = Base()
     return {"message": "Hello World"}
