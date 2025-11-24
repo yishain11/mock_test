@@ -16,7 +16,7 @@ class Room:
     def update_residence_num(self):
         self.current_num_of_residances = len(self.current_residances)
 
-    def report_vacany(self):
+    def report_vacancy_rooms(self):
         if self.max_occpiers == self.current_num_of_residances:
             return -1
         else:
@@ -28,6 +28,7 @@ class Room:
             return False
         self.current_residances.append(new_soldier)
         self.update_residence_num()
+        return True
 
 
 class Building:
@@ -53,9 +54,28 @@ class Building:
         # maybe refactor later to remove rooms by id when occupied
         self.rooms_id_vacancy = []
         for room in self.rooms:
-            is_vacant_id = room.report_vacany()
+            is_vacant_id = room.report_vacancy_rooms()
             if is_vacant_id > 0:
                 self.rooms_id_vacancy.append(is_vacant_id)
+
+    def report_vacancy_building(self):
+        if len(self.rooms_id_vacancy) == 0:
+            print(f"no rooms found in building: {self.id}")
+            return False
+        return self.rooms_id_vacancy
+
+    def add_soldier_to_room(self, new_soldier: Soldier, room_id: int):
+        room_list = [r for r in self.rooms if r.id == room_id]
+        if len(room_list) == 0:
+            print("no room found")
+            return False
+        room = room_list[0]
+        res = room.add_soldier(new_soldier)
+        if res:
+            print("soldier added successfully")
+            return True
+        print("soldier was not added!")
+        return False
 
 
 class Base:
