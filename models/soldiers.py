@@ -29,3 +29,6 @@ class Soldier:
         self.status_hosing = new_status
         print("status changed")
         return True
+
+    def get_distance(self):
+        return self.distance
