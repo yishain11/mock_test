@@ -13,7 +13,7 @@ class Soldier:
         last_name,
         city,
         distance,
-        status_hosting="ממתין",
+        status_hosting="waiting",
     ) -> None:
         self.personal_num = personal_num
         self.first_name = first_name
@@ -23,9 +23,6 @@ class Soldier:
         self.status_hosing = status_hosting
 
     def change_status(self, new_status):
-        if new_status not in ["שובץ למגורים", "ממתין"]:
-            print("wrong status, cannot change")
-            return False
         self.status_hosing = new_status
         print("status changed")
         return True
